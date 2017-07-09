@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,6 +41,9 @@ INSTALLED_APPS = [
     'post',
     'member',
 ]
+
+# Custom User
+AUTH_USER_MODEL = 'member.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
