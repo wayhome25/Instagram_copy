@@ -1,5 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound
+from django.shortcuts import redirect, render
 from django.template import loader
 
 from .models import Post
@@ -17,9 +17,17 @@ def post_detail(request, post_pk):
     """
     post_pk에 해당헤는 Post 객체 리턴, 보여줌
     django.template.loader.get_template +
-    django.http.HttpResponse 함수를 축약한 shortcut = render 함수
+    django.http.HttpResponse 함수를 축약한 shortcut = render 함
     """
-    post = Post.objects.get(pk=post_pk)
+    try:
+        post = Post.objects.get(pk=post_pk)
+    except Post.DoesNotExist as e:
+        # 1. 404를 띄운다
+        # return HttpResponseNotFound('Post가 없어용 detail:{}'.format(e))
+
+        # 2. post_list view로 돌아간다 - redirect 사용
+        return redirect('post:post_list')
+
     template = loader.get_template('post/post_detail.html')
     context = {
         'post': post,
