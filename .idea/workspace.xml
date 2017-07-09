@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaad8044-bfa2-414e-ba89-3ed6613e07d3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/django_app/config/settings.py" afterPath="$PROJECT_DIR$/django_app/config/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/django_app/post/models.py" afterPath="$PROJECT_DIR$/django_app/post/models.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,9 +17,11 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/django_app/post/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="660">
+              <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding>
+                <element signature="e#120#148#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -433,9 +435,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/django_app/post/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="660">
+          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#120#148#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
