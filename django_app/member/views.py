@@ -5,6 +5,7 @@ from django.contrib.auth import \
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
+from .forms import LoginForm
 
 User = get_user_model()
 
@@ -14,20 +15,31 @@ def login(request):
     실패할 경우 HttpResponse로 'Login invalid' 표시
     """
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        ### Form 클래스 미사용시
+        # username = request.POST.get('username')
+        # password = request.POST['password']
+        # user = authenticate(request, username=username, password=password)
+        #
+        # if user is not None:
+        #     django_login(request, user)
+        #     return redirect('post:post_list')
+        # else:
+        #     return HttpResponse('로그인 실패')
 
-        if user is not None:
+        ### Form 클래스 사용시
+        # Bound form 생성
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = form.cleaned_data['user']
             django_login(request, user)
             return redirect('post:post_list')
         else:
-            return HttpResponse('로그인 실패')
-
+            return HttpResponse('로그인 정보에 문제가 있어요!')
     else:
         if request.user.is_authenticated:
             return redirect('post:post_list')
-        return render(request, 'member/login.html')
+        form = LoginForm()
+        return render(request, 'member/login.html', {'form': form})
 
 
 def logout(request):
