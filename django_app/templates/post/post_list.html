@@ -2,8 +2,7 @@
 
 {% block content %}
     {% for post in posts %}
-    <div>
-        <img src="{{ post.photo.url }}" alt="">
-    </div>
+        {% include 'include/post.html' %}
     {% endfor %}
+
 {% endblock %}
