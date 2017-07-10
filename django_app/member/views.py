@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
@@ -12,16 +12,24 @@ def login(request):
     """
     if request.method == 'POST':
         username = request.POST.get('username')
-        password = request.POST.get('password')
+        password = request.POST['password']
         user = authenticate(request, username=username, password=password)
-        print('로그인 유저', user)
 
         if user is not None:
-            auth_login(request, user)
+            django_login(request, user)
             return redirect('post:post_list')
         else:
             return HttpResponse('로그인 실패')
 
     else:
+        if request.user.is_authenticated:
+            return redirect('post:post_list')
         return render(request, 'member/login.html')
 
+
+def logout(request):
+    """
+    로그아웃 후 post_list 뷰 이동
+    """
+    django_logout(request)
+    return redirect('post:post_list')
