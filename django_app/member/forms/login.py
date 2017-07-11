@@ -26,11 +26,12 @@ class LoginForm(forms.Form):
     )
 
     # is_valid 실행 시 Form 내부의 모든 Field에 대한 유효성 검증을 실행하는 메서드
+    # https: // docs.djangoproject.com / en / 1.11 / ref / forms / validation /
     def clean(self):
-        # clean() 메서드를 실행한 결과 dict를 가져옴
-        cleaned_data = super().clean()
-        username = cleaned_data.get('username')
-        password = cleaned_data.get('password')
+        # clean() 메서드를 실행한 기본결과 dict를 가져옴
+        # cleaned_data = super().clean()
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
 
         user = authenticate(username=username, password=password)
 
