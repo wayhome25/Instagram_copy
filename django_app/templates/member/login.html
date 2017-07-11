@@ -2,11 +2,11 @@
 
 
 {% block content %}
-    <div>
+    <div class="content">
         <form action="" method="post">
             {% csrf_token %}
-            {{ form }}
-           <button type="submit">로그인</button>
+            {% include 'include/field_set.html' %}
+           <button type="submit" class="btn">로그인</button>
         </form>
     </div>
 {% endblock %}
