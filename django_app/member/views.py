@@ -11,7 +11,7 @@ User = get_user_model()
 
 def login(request):
     """
-    POST 요청이 올 경우 로그인 완료 후 post_list 뷰 이동
+    POST 요청이 올 경우 로그인 완료 후 post_list 뷰
     실패할 경우 HttpResponse로 'Login invalid' 표시
     """
     if request.method == 'POST':

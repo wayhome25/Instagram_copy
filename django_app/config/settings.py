@@ -40,6 +40,7 @@ ALLOWED_HOSTS = []
 
 # Custom User (default: auth.User)
 AUTH_USER_MODEL = 'member.User'
+LOGIN_URL = 'member:login' # todo url name 사용 가능
 
 # Application definition
 

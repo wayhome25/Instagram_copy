@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.template import loader
 from django.urls import reverse
 
+from .forms import PostForm
 from .models import Post
 
 User = get_user_model()
@@ -52,30 +54,40 @@ def post_detail(request, post_pk):
 
 
 
-
+@login_required
 def post_create(request):
     """
     POST 요청을 받아 Post 객체를 생성 후 post_list 페이지로 redirect
     """
-    if request.method == 'POST':
+    # if request.method == 'POST':
         # 제출된 form 내용으로 새로운 Post 객체 생성 후 post_detail 뷰로 redirect
         # get_user_model을 이용해서 얻은 User클래스(Django에서 인증에 사용하는 유저모델)에서 임의의 유저 한명을 가져온다.
-        user = User.objects.first()
-        post = Post.objects.create(
-            author = user,
-            photo = request.FILES['file'],
-        )
-        comment_string = request.POST.get('comment', '')
-
-        if comment_string:
-            post.comment_set.create(
-                author = user,
-                content = comment_string,
-            )
-        return redirect('post:post_detail', post_pk=post.pk)
+    #     user = User.objects.first()
+    #     post = Post.objects.create(
+    #         author = user,
+    #         photo = request.FILES['file'],
+    #     )
+    #     comment_string = request.POST.get('comment', '')
+    #
+    #     if comment_string:
+    #         post.comment_set.create(
+    #             author = user,
+    #             content = comment_string,
+    #         )
+    #     return redirect('post:post_detail', post_pk=post.pk)
+    # else:
+    #     return render(request, 'post/post_create.html')
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            # ModelForm의 save 메스드를 활용해서 Post를 가져옴
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post:post_detail', post_pk=post.pk)
     else:
-        return render(request, 'post/post_create.html')
-
+        form = PostForm()
+    return render(request, 'post/post_create.html', {'form': form})
 
 def post_modify(request, post_pk):
     pass
